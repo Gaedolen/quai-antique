@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Carte - Quai Antique{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/carte.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="carte-page">
+
+    {# =================== ENTRÉES =================== #}
+    <section class="menu-section">
+        <h2 class="menu-title">Entrées</h2>
+        <div class="cards-container">
+            {% for plat in plats %}
+                {% if plat.categorie == 'Entrée' %}
+                    <div class="plat-card">
+                        <img src="{{ asset('images/' ~ plat.photo) }}" alt="{{ plat.nom }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ plat.nom }}</h5>
+                            <p class="card-text">{{ plat.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="prix">{{ plat.prix }} €</span>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+
+    {# =================== PLATS =================== #}
+    <section class="menu-section">
+        <h2 class="menu-title">Plats</h2>
+        <div class="cards-container">
+            {% for plat in plats %}
+                {% if plat.categorie == 'Plats' %}
+                    <div class="plat-card">
+                        <img src="{{ asset('images/' ~ plat.photo) }}" alt="{{ plat.nom }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ plat.nom }}</h5>
+                            <p class="card-text">{{ plat.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="prix">{{ plat.prix }} €</span>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+
+    {# =================== DESSERTS =================== #}
+    <section class="menu-section">
+        <h2 class="menu-title">Desserts</h2>
+        <div class="cards-container">
+            {% for plat in plats %}
+                {% if plat.categorie == 'Desserts' %}
+                    <div class="plat-card">
+                        <img src="{{ asset('images/' ~ plat.photo) }}" alt="{{ plat.nom }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ plat.nom }}</h5>
+                            <p class="card-text">{{ plat.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="prix">{{ plat.prix }} €</span>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

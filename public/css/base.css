@@ -1,0 +1,122 @@
+/* ===== FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #F5F3EF;
+    color: #1F3D2B;
+}
+
+/* ===== HEADER ===== */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background-color: #1F3D2B;
+}
+
+.site-header .titre-logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #F5F3EF;
+    text-decoration: none;
+}
+
+.site-header .nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.site-header .nav-link {
+    color: #F5F3EF;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.site-header .nav-link:hover {
+    color: #C9A66B;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background-color: #1F3D2B;
+    color: #F5F3EF;
+    text-align: center;
+    padding: 1.5rem 2rem;
+}
+
+.site-footer a {
+    color: #6B4F3A;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: color 0.3s;
+}
+
+.site-footer a:hover {
+    color: #C9A66B;
+}
+
+.footer-links {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+/* Tablettes larges : max-width 1024px */
+@media (max-width: 1024px) {
+    .site-header .titre-logo {
+        font-size: 1.6rem;
+    }
+
+    .site-header .nav-link {
+        font-size: 1rem;
+    }
+}
+
+/* Tablettes / petits écrans : max-width 768px */
+@media (max-width: 768px) {
+    .site-header {
+        flex-direction: column; /* logo au-dessus, nav en dessous */
+        align-items: center;
+        padding: 1rem 2rem;
+    }
+
+    .site-header .titre-logo {
+        margin-bottom: 0.5rem; /* espace entre logo et nav */
+        text-align: center;
+    }
+
+    .site-header .nav {
+        justify-content: center; /* liens centrés sous le logo */
+        flex-wrap: wrap;         /* si trop serré, passe à la ligne suivante */
+        gap: 0.8rem;
+    }
+
+    .site-header .nav-link {
+        font-size: 0.95rem;
+    }
+}
+
+/* Petits mobiles : max-width 480px */
+@media (max-width: 480px) {
+    .site-header {
+        padding: 0.8rem 1rem;
+    }
+
+    .site-header .titre-logo {
+        font-size: 1.3rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .site-header .nav {
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .site-header .nav-link {
+        font-size: 0.9rem;
+    }
+}
