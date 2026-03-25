@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use MongoDB\Client;
-use MongoDB\UpdateResult;
 
 class MongoService
 {
@@ -14,36 +13,47 @@ class MongoService
         $this->client = new Client($uri);
     }
 
-    public function insertOne(string $collection, array $document): void
-    {
-        $this->client->selectDatabase('quai_antique')
-                     ->selectCollection($collection)
-                     ->insertOne($document);
-    }
-
-    public function upsertDailyStats(string $collection, string $date, int $nbCouvert): UpdateResult
+    /**
+     * Met à jour ou crée le document des stats quotidiennes.
+     */
+    public function upsertDailyStats(string $collection, string $date, int $nbCouvert): void
     {
         $dbCollection = $this->client->selectDatabase('quai_antique')
                                      ->selectCollection($collection);
 
-        return $dbCollection->updateOne(
-            ['date' => $date], // critère : date
-            [
-                '$inc' => [               // incrémente les valeurs existantes
-                    'totalReservations' => 1,
-                    'totalCouverts' => $nbCouvert
-                ]
-            ],
-            ['upsert' => true] // crée le document si il n'existe pas
+        // Crée le document s'il n'existe pas
+        $doc = $dbCollection->findOne(['date' => $date]);
+        if (!$doc) {
+            $dbCollection->insertOne([
+                'date' => $date,
+                'totalReservations' => 0,
+                'totalCouverts' => 0
+            ]);
+        }
+
+        // Incrémente les compteurs
+        $dbCollection->updateOne(
+            ['date' => $date],
+            ['$inc' => [
+                'totalReservations' => 1,
+                'totalCouverts' => $nbCouvert
+            ]]
         );
     }
 
+    /**
+     * Retourne les stats quotidiennes pour la date donnée.
+     */
     public function getDailyStats(string $collection, string $date): array
     {
         $doc = $this->client->selectDatabase('quai_antique')
                             ->selectCollection($collection)
                             ->findOne(['date' => $date]);
 
-        return $doc ? $doc->getArrayCopy() : ['date' => $date, 'totalReservations' => 0, 'totalCouverts' => 0];
+        return $doc ? $doc->getArrayCopy() : [
+            'date' => $date,
+            'totalReservations' => 0,
+            'totalCouverts' => 0
+        ];
     }
 }
