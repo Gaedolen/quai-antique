@@ -11,6 +11,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!form || !btnReserver || !modal) return;
 
+    // --- Limite du nombre de couverts ---
+    const nbCouvertInput = form.elements['reservation[nbCouvert]'];
+    const maxCouverts = 15;
+
+    nbCouvertInput.addEventListener('input', (e) => {
+        let val = parseInt(e.target.value);
+        if (isNaN(val)) {
+            e.target.value = '';
+            return;
+        }
+        if (val > maxCouverts) {
+            // On ne garde que le premier chiffre si > max
+            if (val.toString().length > 1) {
+                e.target.value = val.toString().substring(0, 1);
+            }
+        }
+    });
+
     // Toggle allergies
     allergiesRadios.forEach(radio => {
         radio.addEventListener('change', () => {

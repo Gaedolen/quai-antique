@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReservationType extends AbstractType
@@ -46,7 +47,18 @@ class ReservationType extends AbstractType
         $builder
             ->add('nbCouvert', IntegerType::class, [
                 'label' => 'Nombre de couverts',
-                'attr' => ['min' => 1],
+                'attr' => [
+                    'min' => 1,
+                    'max' => 15,
+                    'id' => 'nbCouvert',
+                ],
+                'constraints' => [
+                    new Range([
+                        'min' => 1,
+                        'max' => 15,
+                        'notInRangeMessage' => 'Vous devez réserver entre {{ min }} et {{ max }} couverts.',
+                    ]),
+                ],
             ])
             ->add('date', DateType::class, [
                 'widget' => 'single_text', // affiche un champ HTML5 avec calendrier
