@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\Plat;
+use App\Entity\FoodCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Plat>
+ * @extends ServiceEntityRepository<FoodCategory>
  */
-class PlatRepository extends ServiceEntityRepository
+class FoodCategoryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Plat::class);
+        parent::__construct($registry, FoodCategory::class);
     }
 
     //    /**
-    //     * @return Plat[] Returns an array of Plat objects
+    //     * @return FoodCategory[] Returns an array of FoodCategory objects
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
+    //        return $this->createQueryBuilder('f')
+    //            ->andWhere('f.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
+    //            ->orderBy('f.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Plat
+    //    public function findOneBySomeField($value): ?FoodCategory
     //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
+    //        return $this->createQueryBuilder('f')
+    //            ->andWhere('f.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->getQuery()
     //            ->getOneOrNullResult()

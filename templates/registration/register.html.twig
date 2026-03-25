@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - Quai Antique{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <h1>Inscription</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {{ form_start(registrationForm) }}
+
+        <div>
+            {{ form_label(registrationForm.nom) }}
+            {{ form_widget(registrationForm.nom) }}
+            {{ form_errors(registrationForm.nom) }}
+        </div>
+
+        <div>
+            {{ form_label(registrationForm.prenom) }}
+            {{ form_widget(registrationForm.prenom) }}
+            {{ form_errors(registrationForm.prenom) }}
+        </div>
+
+        <div>
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email) }}
+            {{ form_errors(registrationForm.email) }}
+        </div>
+
+        <div>
+            {{ form_label(registrationForm.password) }}
+            {{ form_widget(registrationForm.password) }}
+            {{ form_errors(registrationForm.password) }}
+        </div>
+
+        <button type="submit">S'inscrire</button>
+
+    {{ form_end(registrationForm) }}
+    
+{% endblock %}

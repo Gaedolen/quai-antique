@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation - Quai Antique{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/reservation.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h1>Réservation</h1>
+
+    {{ form_start(form, {'attr': {'id': 'reservation-form'}}) }}
+
+        <div class="line-container">
+            <div class="form-group">
+                {{ form_label(form.nbCouvert) }}
+                {{ form_widget(form.nbCouvert, {'attr': {'id': 'nbCouvert', 'class': 'form-control', 'min': 1}}) }}
+                {{ form_errors(form.nbCouvert) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.date) }}
+                {{ form_widget(form.date, {'attr': {'id': 'date', 'class': 'form-control'}}) }}
+                {{ form_errors(form.date) }}
+            </div>
+        </div>
+
+        {% set heureStr = form.heure.vars.data ? form.heure.vars.data|date('H:i') : '' %}
+
+        <div class="form-group">
+            <label>Midi</label>
+            <div class="heure-container">
+                {% for choice in form.heure.vars.choices['Midi'] %}
+                    <div class="heure-item">
+                        <input type="radio"
+                            id="heure_{{ loop.index }}"
+                            name="{{ form.heure.vars.full_name }}"
+                            value="{{ choice.value }}"
+                            {% if heureStr == choice.value %}checked{% endif %}>
+                        <label for="heure_{{ loop.index }}">{{ choice.label }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Soir</label>
+            <div class="heure-container">
+                {% for choice in form.heure.vars.choices['Soir'] %}
+                    <div class="heure-item">
+                        <input type="radio"
+                            id="heure_{{ loop.index + 100 }}"
+                            name="{{ form.heure.vars.full_name }}"
+                            value="{{ choice.value }}"
+                            {% if heureStr == choice.value %}checked{% endif %}>
+                        <label for="heure_{{ loop.index + 100 }}">{{ choice.label }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {{ form_errors(form.heure) }}
+
+        <div class="form-group">
+            {{ form_label(form.allergiesActive) }}
+            <div class="allergies-container">
+                {% for child in form.allergiesActive %}
+                    <div class="allergie-item">
+                        {{ form_widget(child) }}
+                        <label for="{{ child.vars.id }}">{{ child.vars.label }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+            {{ form_errors(form.allergiesActive) }}
+        </div>
+
+        <div class="form-group" id="allergies-container" style="display: none;">
+            {{ form_label(form.allergies) }}
+            {{ form_widget(form.allergies, {'attr': {'id': 'allergies-text', 'class': 'form-control'}}) }}
+            {{ form_errors(form.allergies) }}
+        </div>
+
+        <div class="btn-container">
+            {{ form_widget(form._token) }}
+            <button type="button" class="btn btn-primary" id="btn-reserver">Réserver</button>
+            <button type="submit" id="real-submit" style="display:none;"></button>
+        </div>
+
+    {{ form_end(form, {'render_rest': false}) }}
+</div>
+
+<!-- Modal -->
+<div id="modal" style="display:none;">
+    <div id="modal-content">
+        <span id="close">&times;</span>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
+<script src="{{ asset('js/reservation.js') }}"></script>
+
+{% endblock %}

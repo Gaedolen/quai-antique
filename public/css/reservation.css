@@ -1,0 +1,294 @@
+/* --- Conteneur du formulaire centré --- */
+.form-container {
+    background-color: #ECE6DC;
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* --- Titres / labels --- */
+.form-container label {
+    font-weight: bold;
+    color: #1F3D2B;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group {
+    margin-bottom: 20px; /* espace vertical entre chaque champ */
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+}
+
+/* --- Champs formulaire --- */
+.form-control {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #6B4F3A;
+    border-radius: 6px;
+    background-color: #F5F3EF;
+    color: #444444;
+    font-size: 14px;
+}
+
+/* --- Champs côte à côte pour nbCouvert et date --- */
+.line-container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.line-container .form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.line-container .form-control {
+    width: auto;
+    min-width: 120px;
+    padding-top: 8px;;
+}
+
+.line-container label {
+    margin: 0;
+}
+
+/* --- Bouton --- */
+.btn-container {
+    display: flex;
+    justify-content: center; /* centre le bouton horizontalement */
+    margin-top: 20px;        /* espace au-dessus */
+}
+
+.btn-primary {
+    background-color: #6B4F3A;
+    color: #F5F3EF;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #C9A66B;
+    color: #1F3D2B;
+}
+
+/* --- Erreurs --- */
+.form-error {
+    color: #C93B3B;
+    font-size: 13px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Conteneur pour les boutons Oui / Non */
+.allergies-container {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.allergie-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Boutons radio carré arrondi */
+.allergies-container input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #6B4F3A;
+    border-radius: 6px;
+    background-color: #F5F3EF;
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Carré interne quand coché */
+.allergies-container input[type="radio"]:checked::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background-color: #6B4F3A;
+    position: absolute;
+}
+
+/* Label juste à droite */
+.allergies-container .form-check-label {
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #444444;
+}
+
+/* --- Horaires en grille --- */
+.heure-container {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 15px;
+    align-items: center;
+}
+
+/* Conteneur bouton + label */
+.heure-item {
+    display: flex;
+    align-items: center;   /* centre verticalement label et bouton */
+}
+
+/* Bouton radio carré arrondi */
+.heure-item input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #6B4F3A;
+    border-radius: 6px;
+    background-color: #F5F3EF;
+    cursor: pointer;
+    position: relative;       /* important pour ::after */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;      /* centre le carré interne */
+}
+
+/* Carré interne quand coché */
+.heure-item input[type="radio"]::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background-color: #6B4F3A;
+    display: none;
+}
+
+/* Afficher carré interne si coché */
+.heure-item input[type="radio"]:checked::after {
+    display: block;
+}
+
+/* Label à droite du bouton */
+.heure-item label {
+    margin-left: 8px;
+    padding-top: 7px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: bold;
+    color: #444444;
+}
+
+/* --- modal overlay --- */
+/* OVERLAY */
+#modal {
+    position: fixed; /* 🔥 CRUCIAL */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.5); /* fond sombre */
+
+    display: none; /* caché par défaut */
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999; /* au-dessus de tout */
+}
+
+/* CONTENU MODAL */
+#modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+
+    width: 400px;
+    max-width: 90%;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+/* BOUTON FERMER */
+#close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Boutons dans la modal */
+#modal-body .btn-confirm {
+    background-color: #6B4F3A;
+    color: #F5F3EF;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+#modal-body .btn-confirm:hover {
+    background-color: #C9A66B;
+    color: #1F3D2B;
+}
+
+#modal-body .btn-cancel {
+    background-color: #C93B3B;
+    color: #F5F3EF;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+#modal-body .btn-cancel:hover {
+    background-color: #fd4444;
+    color: #F5F3EF;
+}
+
+/* Messages de statut */
+#modal-body .loading {
+    font-style: italic;
+    color: #444444;
+    margin: 20px 0;
+}
+
+#modal-body .success {
+    font-weight: bold;
+    color: #1F3D2B;
+    margin: 20px 0;
+}
+
+/* Texte des infos */
+#modal-body p {
+    margin: 15px 0;
+    font-weight: bold;
+    color: #1F3D2B;
+    font-size: 16px;
+}
