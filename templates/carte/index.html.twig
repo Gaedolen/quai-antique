@@ -10,12 +10,18 @@
 
 <div class="carte-page">
 
+    <div class="carte-intro">
+        <h1>Notre Carte</h1>
+        <p>Découvrez nos entrées, plats et desserts préparés avec soin par notre chef.</p>
+        <p>Chaque plat est sélectionné pour ravir vos papilles !</p>
+    </div>
+
     {# =================== ENTRÉES =================== #}
     <section class="menu-section">
         <h2 class="menu-title">Entrées</h2>
         <div class="cards-container">
             {% for plat in plats %}
-                {% if plat.categorie == 'Entrée' %}
+                {% if plat.categorie == 'entree' %}
                     <div class="plat-card">
                         <img src="{{ asset('images/' ~ plat.photo) }}" alt="{{ plat.nom }}">
                         <div class="card-body">
@@ -36,7 +42,7 @@
         <h2 class="menu-title">Plats</h2>
         <div class="cards-container">
             {% for plat in plats %}
-                {% if plat.categorie == 'Plats' %}
+                {% if plat.categorie == 'plat' %}
                     <div class="plat-card">
                         <img src="{{ asset('images/' ~ plat.photo) }}" alt="{{ plat.nom }}">
                         <div class="card-body">
@@ -57,7 +63,7 @@
         <h2 class="menu-title">Desserts</h2>
         <div class="cards-container">
             {% for plat in plats %}
-                {% if plat.categorie == 'Desserts' %}
+                {% if plat.categorie == 'dessert' %}
                     <div class="plat-card">
                         <img src="{{ asset('images/' ~ plat.photo) }}" alt="{{ plat.nom }}">
                         <div class="card-body">

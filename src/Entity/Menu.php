@@ -30,13 +30,9 @@ class Menu
     #[ORM\Column(nullable: true)]
     private ?\DateTime $updateAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'menu', targetEntity: MenuCategory::class)]
-    private Collection $menuCategories;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->menuCategories = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getId(): ?int

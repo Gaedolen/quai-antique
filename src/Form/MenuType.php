@@ -21,7 +21,6 @@ class MenuType extends AbstractType
             ->add('createdAt')
             ->add('updateAt')
             ->add('restaurant', EntityType::class, [
-                'class' => Restaurant::class,
                 'choice_label' => 'id',
             ])
         ;

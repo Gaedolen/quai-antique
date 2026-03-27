@@ -19,7 +19,6 @@ class PictureType extends AbstractType
             ->add('createAt')
             ->add('UpdateAt')
             ->add('restaurant', EntityType::class, [
-                'class' => Restaurant::class,
                 'choice_label' => 'id',
             ])
         ;

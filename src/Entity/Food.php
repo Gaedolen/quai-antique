@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\FoodRepository;
 use Doctrine\DBAL\Types\Types;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FoodRepository::class)]
@@ -29,9 +28,6 @@ class Food
 
     #[ORM\Column(length: 100)]
     private ?string $categorie = null;
-
-    #[ORM\OneToMany(mappedBy: 'food', targetEntity: FoodCategory::class)]
-    private Collection $foodCategories;
 
     public function getId(): ?int
     {

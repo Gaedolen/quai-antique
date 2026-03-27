@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
@@ -22,12 +21,6 @@ class Category
 
     #[ORM\Column(nullable: true)]
     private ?\DateTime $updateAt = null;
-
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: FoodCategory::class)]
-    private Collection $foodCategories;
-
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: MenuCategory::class)]
-    private Collection $menuCategories;
 
     public function getId(): ?int
     {
