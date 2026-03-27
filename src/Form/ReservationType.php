@@ -61,13 +61,16 @@ class ReservationType extends AbstractType
                 ],
             ])
             ->add('date', DateType::class, [
-                'widget' => 'single_text', // affiche un champ HTML5 avec calendrier
-                'html5' => true,           // pour activer le picker natif du navigateur
+                'widget' => 'single_text',
+                'html5' => true,
                 'label' => 'Date de réservation',
                 'required' => true,
+                'attr' => [
+                    'min' => (new \DateTime())->format('Y-m-d'), // empêche les dates avant aujourd'hui
+                ],
             ])
             ->add('heure', ChoiceType::class, [
-                'choices' => $heureChoices, // ton tableau Midi/Soir
+                'choices' => $heureChoices, // tableau Midi/Soir
                 'expanded' => true,         // boutons radio
                 'multiple' => false,        // un seul choix possible
                 'label' => 'Heure du repas',

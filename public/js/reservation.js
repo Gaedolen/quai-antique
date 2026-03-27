@@ -29,6 +29,55 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- Récupérer le champ date ---
+    const dateInput = form.elements['reservation[date]'];
+
+    // --- Bloquer les créneaux complets (70 couverts) et les dimanches ---
+    const heureInputs = form.querySelectorAll('input[name="reservation[heure]"]');
+
+    function updateHeures(date) {
+        if (!date) return;
+        fetch(`/reservation/slots?date=${date}`)
+            .then(res => res.json())
+            .then(slots => {
+                heureInputs.forEach(input => {
+                    const label = document.querySelector(`label[for="${input.id}"]`);
+                    const count = slots[input.value] || 0;
+                    if (count >= 70) {
+                        input.disabled = true;
+                        label.style.color = '#ccc';
+                    } else {
+                        input.disabled = false;
+                        label.style.color = '';
+                    }
+                });
+            });
+    }
+
+    if (dateInput) {
+        // Minimum date = aujourd'hui
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+
+        dateInput.addEventListener('input', e => {
+            const val = e.target.value;
+            if (!val) return;
+
+            const selectedDate = new Date(val);
+            if (selectedDate.getDay() === 1) { // lundi
+                alert("Le restaurant est fermé le lundi. Veuillez choisir un autre jour.");
+                e.target.value = '';
+                return;
+            }
+
+            // Mettre à jour les heures disponibles
+            updateHeures(val);
+        });
+
+        // précharger les heures dès le chargement si une date est déjà sélectionnée
+        if (dateInput.value) updateHeures(dateInput.value);
+    }
+
     // Toggle allergies
     allergiesRadios.forEach(radio => {
         radio.addEventListener('change', () => {
